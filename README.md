@@ -1,5 +1,7 @@
 # SpringSecurity源码学习
 
+> 学习视频地址：https://www.bilibili.com/video/BV1Rv4y1w74n
+
 ## 一、第一节内容
 
 主要讲解了SpringSecurity的顶层脉络以及几个核心的类：
