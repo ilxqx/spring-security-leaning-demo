@@ -137,3 +137,11 @@ WebSecurityConfiguration 注入了我们自己的 SecurityFilterChain Bean然后
 
 * 基于Redis的有状态的Token
 * 基于JWT的无状态Token
+
+## 十二、第十二节内容（最后一节）
+
+本节内容将讲解SpringSecurity最后一块内容，基于方法级别的权限控制及其实现原理
+
+* MethodSecurityInterceptor
+* MethodInterceptor
+* PrePostAnnotationSecurityMetadataSource

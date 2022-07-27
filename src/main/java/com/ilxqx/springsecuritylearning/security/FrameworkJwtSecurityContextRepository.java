@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -79,7 +80,7 @@ public class FrameworkJwtSecurityContextRepository implements SecurityContextRep
         }
         Claims claims = claimsJws.getBody();
 
-        JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken((String) claims.get("userId"));
+        JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(AuthorityUtils.commaSeparatedStringToAuthorityList((String) claims.get("authorities")), (String) claims.get("userId"));
         securityContext.setAuthentication(authenticationToken);
 
         return securityContext;
@@ -98,9 +99,13 @@ public class FrameworkJwtSecurityContextRepository implements SecurityContextRep
         String accessToken = Jwts.builder()
             .signWith(secretKey)
             .claim("userId", userDetails.getUsername())
+            .claim("authorities", String.join(
+                ",",
+                AuthorityUtils.authorityListToSet(context.getAuthentication().getAuthorities())
+            ))
             .setExpiration(
                 new Date(
-                    System.currentTimeMillis() + Duration.ofMinutes(2).toMillis()
+                    System.currentTimeMillis() + Duration.ofMinutes(60).toMillis()
                 )
             )
             .compact();

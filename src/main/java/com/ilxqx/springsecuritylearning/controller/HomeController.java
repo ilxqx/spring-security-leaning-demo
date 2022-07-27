@@ -1,6 +1,8 @@
 package com.ilxqx.springsecuritylearning.controller;
 
 import com.ilxqx.springsecuritylearning.pojo.JsonResult;
+import com.ilxqx.springsecuritylearning.service.HomeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/home")
+@RequiredArgsConstructor
 public class HomeController {
 
+    private final HomeService homeService;
 
     @GetMapping(value = "/index", produces = MediaType.APPLICATION_JSON_VALUE)
     public JsonResult<String> index() {
-        return JsonResult.success("成功", "欢迎来到首页！");
+        return JsonResult.success("成功", this.homeService.sayHello());
     }
 }

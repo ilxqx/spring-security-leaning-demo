@@ -1,7 +1,9 @@
 package com.ilxqx.springsecuritylearning.security;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -17,6 +19,12 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
     public JwtAuthenticationToken(String userId) {
         super(Collections.emptyList());
+        this.userId = userId;
+        setAuthenticated(true);
+    }
+
+    public JwtAuthenticationToken(Collection<? extends GrantedAuthority> authorities, String userId) {
+        super(authorities);
         this.userId = userId;
         setAuthenticated(true);
     }

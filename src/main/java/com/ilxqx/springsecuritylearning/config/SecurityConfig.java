@@ -4,7 +4,7 @@ import com.ilxqx.springsecuritylearning.support.SmsCodeAuthenticationProvider;
 import com.ilxqx.springsecuritylearning.support.SmsCodeLoginConfigurer2;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,7 +19,7 @@ import org.springframework.security.web.context.SecurityContextRepository;
  * @version 1.0.0
  * @since 2022/6/21 22:40
  */
-@Configuration(proxyBeanMethods = false)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     @Bean
